@@ -1,8 +1,6 @@
-# DevOps
+# Linux
 
-## Linux
-
-### Alguns directoris importants
+## Alguns directoris importants
 
 - Home: `/root, /home/username`
 - User Executable: `/bin, /usr/bin, /usr/local/bin`
@@ -16,7 +14,7 @@
 - System information: `/proc, /sys`
 - Shared libraries: `/lib, /usr/lib, /usr/local/lib`
 
-### Terminal
+## Terminal
 
 - `[vagrant@localhost ~]$`
   - usuari@hostname.
@@ -27,7 +25,9 @@
   - `~`: Home directory (`/root`).
   - `#`: Root shell.
 
-### Algunes ordres
+Puc canviar el hostname canviant el fitxer `/etc/hostname`. I `hostname <new_hostname>`
+
+## Algunes ordres
 
 - `pwd` Present working directory.
 - `cat` Imprimeix el contingut d'un fitxer.
@@ -37,7 +37,7 @@
   - `unlink {file}` Per defer l'enllaç.
 - `free` Mostra la memòria.
 
-#### File system
+### File system
 
 - `mkdir` Crea una carpeta.
 - `touch` Crea un fitxer buit o actualitzar el timestamp del fitxer.
@@ -58,7 +58,7 @@
 - `-v` Verbose
 - `-f` File
 
-#### Filtering
+### Filtering
 
 - `grep [PATTERNS] FILE` Busca cadena de text en fixer (`-i` ignore-case). Global Regular Expression Print.
 - `less FILE` Llegeix un fitxer. Més interactiu que `cat` ja que `cat` només l'imprimeix.
@@ -73,7 +73,7 @@
 - `wc FILE` Word Count. `-c` caràcters, `-w` paraules, `-l` línies.
 - `find PATH -name FILE`.
 
-#### Input/Output Redirecting
+### Input/Output Redirecting
 
 En general l'output és a la pantalla. Es mostra imprès.
 
@@ -106,7 +106,7 @@ root:x:0:0:root:/root:/bin/bash
 - `/root` El home directory.
 - `/bin/bash` La login shell.
 
-#### Ordres
+### Ordres
 
 - `useradd USER` Afegim un usuari.
 - `userdel USER` Elimina un usuari. `-r` Per eliminar-ne també el home directory.
@@ -117,7 +117,7 @@ root:x:0:0:root:/root:/bin/bash
 - `whoami`
 - `lsof -u USER` Fitxers oberts per aquest usuari.
 
-#### Permissions
+### Permissions
 
 `-rwxr-xr-x` Es separa en 1, 3, 3, 3. Els grups de tres són, en ordre, `rwx`: `r` read, `w` write, `x` execute.
 
@@ -133,7 +133,7 @@ root:x:0:0:root:/root:/bin/bash
   - `r, w, x` El permís que modifiquem. També poden tenir un valor numèric: `r=4`, `w=2`, `x=1` de tal manera que podem definir els permisos numèricament.
     - Per posició definim `u,g,o` i podem dir: `chmod 640 FILE`. El usuari tindrà `rw- = 4+2`, el grup tindrà `r-- = 4` i els altres tindran `--- = 0`.
 
-#### Sudo
+### Sudo
 
 Amb `visudo` podem modificar l'arxiu qeu defineix quins usuaris tenen permís de `sudo`. Aquest fitxer es troba a `/etc/sudoers`.
 
@@ -147,7 +147,7 @@ Amb `NOPASSWD:` no ens demana el propi password de l'usuari quan executem `sudo`
 
 Puc crear el meu propi fitxer de sudoers a `/etc/sudoers.d/`.
 
-### Software management
+## Software management
 
 Hi ha `rpm` i `dpkg` en funció de l'OS que fem servir. En els nostres casos, en funció del `centos`o del `ubuntu` que és debian.
 
@@ -170,7 +170,7 @@ Desinstal·lem amb `rpm -e PACKAGE` Erase.
 
 Problema. Així manualment pot ser que volguem descarregar-nos un paquet i ens trobem que ens diu que necessita d'altres per a poder-se instal·lar. Dependències.
 
-#### yum/dnf
+### yum/dnf
 
 `yum search PACKAGE` i busquem el packet via yum.
 
@@ -178,27 +178,6 @@ Problema. Així manualment pot ser que volguem descarregar-nos un paquet i ens t
 
 `dnf remove PACKAGE`. Ens desinstal·larà dependències que NO S'ESTAN USANT.
 
-### Processes
+## Processes
 
 Amb `top` veiem els processos que s'estan executant.
-
-## Vagrant
-
-Per automatitzar el procés de creació o configuració de màquines virtuals (VM).
-
-Buscar boxes a: `https://portal.cloud.hashicorp.com/vagrant/discover`.
-
-- Centos: eurolinux-vagrant/centos-stream-9
-- Ubuntu: ubuntu/jammy64
-
-### Ordres
-
-- `vagrant init eurolinux-vagrant/centos-stream-9` Per crer el fitxer vagrant.
-- `vagrant up` Per crear la VM.
-- `vagrant box list` Per llistar les boxes descarregades.
-- `vagrant status` Estatus de les VM en _aquesta_ carpeta.
-- `vagrant global-status` Estatus de totes les VM. (`--prune`). Aquí hi puc veure, a més, la id de cada VM i interactuar amb ella directament sense haver d'estar al seu directori. Ordres com `ssh, halt, destroy, reload ${id}`.
-- `vagrant ssh` Per fer login a la VM creada.
-- `vagrant halt` Per aturar la VM.
-- `vagrant reload` Per fer un reboot de la VM per si canviem coses al fitxer vagrant.
-- `vagrant destroy` Per destruir la VM. Si obrim VirtualBox ja no la veurem. La Box que ens hem descarregat amb `vagrant init` la seguim tenint. Hem destruit la VM.
